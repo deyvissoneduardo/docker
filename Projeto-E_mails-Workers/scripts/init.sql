@@ -1,5 +1,6 @@
 create database email_sender;
 
+/*para se conectar ao banco postgres*/
 \c email_sender
 
 create table emails (
