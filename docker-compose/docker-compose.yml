@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+    nodejs:
+        build: ./image
+        image: jacksonpires/ubuntu-ssh-nvm
+        volumes:
+            - .:/workspace
+        ports:
+            - "22"
+            - "3090"
+        depends_on: 
+            - db    
+        networks: 
+            - my_network    
+    db:
+        image: postgres
+        restart: always
+        environment: 
+            POSTGRES_PASSWORD: admin
+        ports: 
+            - "5432"
+        volumes: 
+            - ./dados_postgres:/var/lib/postgresql/data            
+        networks: 
+            my_network:
+                aliases: 
+                    - pgsql
+
+networks: 
+    my_network:                    
+
+
